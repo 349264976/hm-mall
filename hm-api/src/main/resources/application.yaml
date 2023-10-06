@@ -1,0 +1,15 @@
+server:
+  port: 18081
+spring:
+  application:
+    name: hm-order
+  profiles:
+    active: dev
+logging:
+  level:
+    com.hmall: debug
+  pattern:
+    dateformat: HH:mm:ss:SSS
+  file:
+    path: "logs/${spring.application.name}"
+# keytool -genkeypair -alias hmall -keyalg RSA -keypass hmall123 -keystore hmall.jks -storepass hmall123
