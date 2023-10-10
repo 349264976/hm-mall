@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig implements WebMvcConfigurer {
 
    private final JwtTool jwtTool;
+
    private final AuthProperties authProperties;
 
 /*    @Bean

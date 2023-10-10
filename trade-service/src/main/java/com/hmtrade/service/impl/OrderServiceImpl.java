@@ -96,6 +96,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         try {
             itemClient.deductStock(orderDetailDTOS);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("库存不足！");
         }
         return order.getId();
