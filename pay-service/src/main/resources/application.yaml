@@ -1,6 +1,12 @@
 server:
   port: 18082
 spring:
+  rabbitmq:
+    host: 192.168.10.102
+    port: 5672
+    virtual-host: /hmall
+    username: admin
+    password: admin
   application:
     name: hm-pay
   profiles:

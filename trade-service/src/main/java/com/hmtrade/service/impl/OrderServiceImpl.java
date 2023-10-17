@@ -14,6 +14,7 @@ import com.hmtrade.domain.po.OrderDetail;
 import com.hmtrade.mapper.OrderMapper;
 import com.hmtrade.service.IOrderDetailService;
 import com.hmtrade.service.IOrderService;
+import io.seata.spring.annotation.GlobalTransactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private final ItemClient itemClient;
 
     @Override
-    @Transactional
+    @GlobalTransactional
     public Long createOrder(OrderFormDTO orderFormDTO) {
         // 1.订单数据
         Order order = new Order();

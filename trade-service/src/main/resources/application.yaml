@@ -1,49 +1,22 @@
 server:
   port: 18089
-spring:
-  application:
-    name: hm-order
-  profiles:
-    active: dev
-  datasource:
-    url: jdbc:mysql://${hm.db.host}:3307/hm-trade?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: ${hm.db.pw}
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.10.102:8848
-mybatis-plus:
-  configuration:
-    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
-  global-config:
-    db-config:
-      update-strategy: not_null
-      id-type: auto
 
-logging:
-  level:
-    com.hmall: debug
-  pattern:
-    dateformat: HH:mm:ss:SSS
-  file:
-    path: "logs/${spring.application.name}"
-knife4j:
-  enable: true
-  openapi:
-    title: 黑马商城接口文档
-    description: "黑马商城接口文档"
-    email: zhanghuyi@itcast.cn
-    concat: 虎哥
-    url: https://www.itkaien.com/
-    version: v1.0.0
-    group:
-      default:
-        group-name: default
-        api-rule: package
-        api-rule-resources:
-          - com.hmtrade.controller
+spring:
+  rabbitmq:
+    host: 192.168.10.102
+    port: 5672
+    virtual-host: /hmall
+    username: admin
+    password: admin
+#spring:
+#  rabbitmq:
+#    connection-timeout: 1s # 设置MQ的连接超时时间
+#    template:
+#      retry:
+#        enabled: true # 开启超时重试机制
+#        initial-interval: 1000ms # 失败后的初始等待时间
+#        multiplier: 1 # 失败后下次的等待时长倍数，下次等待时长 = initial-interval * multiplier
+#        max-attempts: 3 # 最大重试次数
 #hm:
 #  jwt:
 #    location: classpath:hmtrade.jks
@@ -57,3 +30,11 @@ knife4j:
 #      - /items/**
 #      - /hi
 # keytool -genkeypair -alias hmall -keyalg RSA -keypass hmall123 -keystore hmall.jks -storepass hmall123
+hm:
+  db:
+    databases: hm-trade
+  swagger:
+    title: 购物车接口文档
+    package: com.hmall.item.controller
+  cart:
+    maxSize: 2 #购物车上限

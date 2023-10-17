@@ -1,5 +1,6 @@
 package com.hmapi.config;
 
+import com.hmapi.client.ItemClientFallbackFactory;
 import com.hmapi.interceptor.UserInfointerceptor;
 import feign.Logger;
 import feign.RequestInterceptor;
@@ -13,5 +14,10 @@ public class FeignLogLevelConfig {
     @Bean
     public RequestInterceptor userInfoInterceptor(){
         return new UserInfointerceptor();
+    }
+
+    @Bean
+    public ItemClientFallbackFactory fallbackFactory(){
+        return new ItemClientFallbackFactory();
     }
 }

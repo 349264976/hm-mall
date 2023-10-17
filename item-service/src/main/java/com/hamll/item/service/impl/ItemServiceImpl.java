@@ -12,6 +12,7 @@ import com.hamll.item.domain.po.Item;
 import java.util.Collection;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -24,14 +25,16 @@ import org.springframework.stereotype.Service;
 public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements IItemService {
 
     @Override
+    @Transactional
     public void deductStock(List<OrderDetailDTO> items) {
         String sqlStatement = "com.hmall.item.mapper.ItemMapper.updateStock";
         boolean r = false;
         try {
             r = executeBatch(items, (sqlSession, entity) -> sqlSession.update(sqlStatement, entity));
         } catch (Exception e) {
-            log.error("更新库存异常", e);
-            return;
+//            log.error("更新库存异常", e);
+//            return;
+            throw new BizIllegalException("更新库存异常！");
         }
         if (!r) {
             throw new BizIllegalException("库存不足！");
